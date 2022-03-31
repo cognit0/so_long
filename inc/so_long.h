@@ -6,7 +6,11 @@
 # include <stdbool.h>
 # include <unistd.h>
 # include <math.h>
+# include <fcntl.h>
 # include "mlx.h"
+# include "head_data.h"
+# include "libft.h"
+
 
 typedef struct s_hitbox
 {
@@ -28,21 +32,51 @@ typedef struct s_mlx
 	void	*win;
 	int    	width;
 	int    	height;
+// maping.
+	char	**map;
+	int		map_width;
+	int		map_height;
+// validation
+	int		exit_obj;
+	int		player_obj;
+	int		collectable_obj;
+
 	t_data	*data;
 }	t_mlx;
 
-t_mlx	*handle_init(int width, int height);
+
+//init
+void	handle_init(t_mlx *handle);
+
+
 
 // DRAWING FUCNTIONS
 int		mlx_drawline_coords(t_mlx *handle, int bx, int dx, int by, int dy, int color);
 void	mlx_put_pixel_fast(t_data *data, int x, int y, int color);
 int		mlx_check_pixel(t_data *data, int x, int y, int color);
 
-// FRAME FUNCTIONS
-int  	ft_frame(t_mlx *handle);
+
+
+// FRAME FUNCTIONS render
+int		ft_frame(t_mlx *handle);
+void	ft_handle_play(t_mlx *handle);
+
+
+
 // UTIL FUNCTIONS
 int		ft_kill(char *str);
+size_t	ft_strlen(const char *c);
+
+
+
 // INPUT FUNCTIONS
-int   	ft_keyPressed(int keycode, t_mlx *handle);
+int		ft_keyPressed(int keycode, t_mlx *handle);
+
+// map generatoring.
+// Read map
+char	**read_map(char *path);
+void	free_map(char **map);
+int		map_checker(t_mlx *handle);
+
 
 #endif

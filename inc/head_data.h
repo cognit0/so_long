@@ -42,4 +42,16 @@
 # define KEY_8 					28
 # define KEY_9 					25
 
+
+# define RED 					0x00FF0000
+# define GREEN 					0x0000FF00
+# define BLUE 					0x000000FF
+# define BLACK 					0x00000000
+# define WHITE					0x00FFFFFF
+# define ORANGE					0x00FF952B
+
+# define GROUND					0x00AEA8A0
+# define SKY					0x00FFF4E5
+# define PLAYER					0x00000000
+# define TARGET					0x000FFFFF
 #endif

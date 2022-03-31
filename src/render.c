@@ -1,11 +1,22 @@
 #include "so_long.h"
 
+
+void	ft_handle_play(t_mlx *handle)
+{
+	mlx_loop_hook(handle->mlx, ft_frame, handle);
+	mlx_hook(handle->win, 2, 1L<<0, ft_keyPressed, handle);
+	mlx_hook(handle->win, 17, 0L, ft_kill, "");
+}
+
+
 static void	cleanWin(t_mlx *handle)
 {
-	for (int x = 0; x < handle->width; x++)
-		for (int y = 0; y < handle->height; y++)
-			mlx_put_pixel_fast(handle->data, x, y, 0x00FFFF00);
+	for (int x = 0; x < handle->map_width; x++)
+		for (int y = 0; y < handle->map_height; y++)
+			mlx_put_pixel_fast(handle->data, x, y, BLUE);
 }
+
+
 
 int  	ft_frame(t_mlx *handle)
 {

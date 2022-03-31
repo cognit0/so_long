@@ -20,6 +20,8 @@ int	mlx_drawline_coords(t_mlx *handle, int bx, int dx, int by, int dy, int color
 	return (0);
 }
 
+
+
 void	mlx_put_pixel_fast(t_data *data, int x, int y, int color)
 {
 	char	*dst;
@@ -27,6 +29,8 @@ void	mlx_put_pixel_fast(t_data *data, int x, int y, int color)
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
 }
+
+
 
 int	mlx_check_pixel(t_data *data, int x, int y, int color)
 {
