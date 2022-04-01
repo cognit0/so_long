@@ -1,15 +1,5 @@
 #include "so_long.h"
 
-
-void	ft_handle_play(t_mlx *handle)
-{
-	// mlx_loop_hook(handle->mlx, ft_frame, handle);
-	mlx_hook(handle->win, 2, 1L<<0, ft_keyPressed, handle);
-	mlx_hook(handle->win, 17, 0L, ft_kill, "");
-	mlx_hook(handle->win, 9, 1L << 21, render_map, handle);
-}
-
-
 static void	cleanWin(t_mlx *handle)
 {
 	for (int x = 0; x < handle->map_width; x++)
@@ -19,9 +9,44 @@ static void	cleanWin(t_mlx *handle)
 
 
 
+void	ft_handle_play(t_mlx *handle)
+{
+	mlx_loop_hook(handle->mlx, ft_frame, handle);
+	mlx_hook(handle->win, 2, 1L<<0, ft_keyPressed, handle);
+	mlx_hook(handle->win, 17, 0L, ft_kill, "");
+}
+
+
+
+static int check_player_on_item(t_mlx *handle, int x, int y)
+{
+	if (handle->map[y / 32][x / 32] == 'C')
+	{
+		handle->collectable_obj--;
+		handle->map[y / 32][x / 32] = '0';
+	}
+	return (0);
+}
+
+
+
+static int check_player_on_exit(t_mlx *handle, int x, int y)
+{
+	if (handle->map[y / 32][x / 32] == 'E')
+		ft_kill("BYE");
+
+	return (0);
+}
+
+
 int	ft_frame(t_mlx *handle)
 {
 	cleanWin(handle);
-	mlx_put_image_to_window(handle->mlx, handle->win, handle->data->img, 0, 0);
+	if (handle->collectable_obj > 0)
+		check_player_on_item(handle, handle->player_x, handle->player_y);
+	else	
+		check_player_on_exit(handle, handle->player_x, handle->player_y);
+	render_map(handle);
+	put_move_count(handle);
 	return (0);
 }
