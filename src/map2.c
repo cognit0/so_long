@@ -53,10 +53,8 @@ int	render_map(t_mlx *handle)
 		{
 			if (handle->map[y][x] == '1')
 				sprite_draw(handle, handle->sprite_wall, x, y);
-			else if (handle->map[y][x] == '0')
+			else if (handle->map[y][x] == '0' || handle->map[y][x] == 'P')
 				sprite_draw(handle, handle->sprite_back, x, y);
-			else if (handle->map[y][x] == 'P')
-				player_draw(handle, handle->sprite_player, x, y);
 			else if (handle->map[y][x] == 'C')
 				sprite_draw(handle, handle->sprite_collectable, x, y);
 			else if (handle->map[y][x] == 'E')
@@ -65,6 +63,7 @@ int	render_map(t_mlx *handle)
 		}
 		y++;
 	}
+	sprite_draw(handle, handle->sprite_player, handle->player_x / 32, handle->player_y / 32);
 	return (0);
 }
 

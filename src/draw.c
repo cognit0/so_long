@@ -41,3 +41,18 @@ int	mlx_check_pixel(t_data *data, int x, int y, int color)
 		return (1);
 	return (0);
 }
+
+int  	put_move_count(t_mlx *handle)
+{
+	char *str;
+
+	str = ft_itoa(handle->number_of_moves);
+	mlx_string_put(handle->mlx, handle->win, 64, 0, 0x00FFFFFF, "Moves:");
+	mlx_string_put(handle->mlx, handle->win, 128, 0, 0x00FFFFFF, str);
+	free(str);
+	str = ft_itoa(handle->collectable_obj);
+	mlx_string_put(handle->mlx, handle->win, handle->map_width - 128 , 0, 0x00FFFFFF, "Candy:");
+	mlx_string_put(handle->mlx, handle->win, handle->map_width - 64, 0, 0x00FFFFFF, str);
+	free(str);
+	return (0);
+}

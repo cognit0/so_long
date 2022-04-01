@@ -11,7 +11,8 @@
 # include "head_data.h"
 # include "libft.h"
 
-typedef struct	s_data {
+typedef struct	s_data 
+{
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
@@ -46,6 +47,7 @@ int		sprite_h;
 // player
 int		player_x;
 int		player_y;
+int  	number_of_moves;
 t_data	*data;
 }	t_mlx;
 
@@ -71,7 +73,10 @@ void	ft_handle_play(t_mlx *handle);
 // UTIL FUNCTIONS
 int		ft_kill(char *str);
 size_t	ft_strlen(const char *c);
+char 	*ft_itoa(int num);
 
+// DRAWING FUNCTIONS
+int  	put_move_count(t_mlx *handle);
 
 
 // INPUT FUNCTIONS

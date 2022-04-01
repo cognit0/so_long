@@ -38,6 +38,30 @@ static	void sprite_init(t_mlx *handle)
 		ft_kill("Sprite hatasi");
 }
 
+static int	ft_render_map(t_mlx *handle)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (handle->map[y])
+	{
+		x = 0;
+		while (handle->map[y][x])
+		{
+			if (handle->map[y][x] == 'P')
+			{
+				handle->player_x = x * 32;
+				handle->player_y = y * 32;
+				return (0);
+			}
+			x++;
+		}
+		y++;
+	}
+	return (0);
+}
+
 
 
 void	handle_init(t_mlx *handle)
@@ -47,6 +71,7 @@ void	handle_init(t_mlx *handle)
 	handle->win = mlx_new_window(handle->mlx, handle->map_width, handle->map_height, "so_long");
 	handle->data = data_init(handle);
 	sprite_init(handle);
-	render_map(handle);
+	ft_render_map(handle);
+	handle->number_of_moves = 0;
 }
 
