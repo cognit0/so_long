@@ -11,13 +11,6 @@
 # include "head_data.h"
 # include "libft.h"
 
-
-typedef struct s_hitbox
-{
-	int x;
-	int y;
-}	t_hixbox;
-
 typedef struct	s_data {
 	void	*img;
 	char	*addr;
@@ -36,12 +29,24 @@ typedef struct s_mlx
 	char	**map;
 	int		map_width;
 	int		map_height;
+
 // validation
 	int		exit_obj;
 	int		player_obj;
 	int		collectable_obj;
 
-	t_data	*data;
+// sprite
+void	*sprite_back;
+void	*sprite_wall;
+void	*sprite_collectable;
+void	*sprite_exit;
+void	*sprite_player;
+int		sprite_w;
+int		sprite_h;
+// player
+int		player_x;
+int		player_y;
+t_data	*data;
 }	t_mlx;
 
 
@@ -77,6 +82,6 @@ int		ft_keyPressed(int keycode, t_mlx *handle);
 char	**read_map(char *path);
 void	free_map(char **map);
 int		map_checker(t_mlx *handle);
-
+int	render_map(t_mlx *handle);
 
 #endif
