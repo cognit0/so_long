@@ -41,10 +41,10 @@ static int check_player_on_exit(t_mlx *handle, int x, int y)
 
 int	ft_frame(t_mlx *handle)
 {
-	cleanWin(handle);
+	// cleanWin(handle);
 	if (handle->collectable_obj > 0)
 		check_player_on_item(handle, handle->player_x, handle->player_y);
-	else	
+	else
 		check_player_on_exit(handle, handle->player_x, handle->player_y);
 	render_map(handle);
 	put_move_count(handle);
