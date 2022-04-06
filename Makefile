@@ -14,13 +14,9 @@ $(NAME): $(OBJ)
 	@rm -rf *.o
 
 $(OBJ): $(SRC)
-	@gcc -c $? -I $(INCLUDES)
-
-$(LIBFT):
-	@make -C lib/libft
-
-$(LIBMLX):
 	@make -C lib/minilibx_macos
+	@make -C lib/libft
+	@gcc -c $? -I $(INCLUDES)
 
 exe: all
 	@make
@@ -33,6 +29,8 @@ clean:
 fclean:
 	@make clean
 	@rm -rf $(NAME)
+	@make clean -C lib/minilibx_macos
+	@make fclean -C lib/libft
 
 re:
 	@make fclean
