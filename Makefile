@@ -4,8 +4,9 @@ LIBFT=lib/libft/libft.a
 LIBMLX=lib/minilibx_macos/libmlx.a
 INCLUDES=inc
 FRAMEWORKS=-framework OpenGL -framework AppKit
-SRC=src/main.c src/init.c src/draw.c src/utils.c src/render.c src/input.c src/map.c src/map2.c src/read_map.c
-OBJ=main.o init.o draw.o utils.o render.o input.o map.o map2.o read_map.o
+SRC=src/main.c src/init.c src/draw.c src/utils.c src/render.c src/input.c src/map.c src/map2.c src/read_map.c \
+src/moves.c src/game.c
+OBJ=main.o init.o draw.o utils.o render.o input.o map.o map2.o read_map.o moves.o game.o
 
 all: $(NAME)
 

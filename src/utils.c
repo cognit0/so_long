@@ -1,5 +1,12 @@
 #include "so_long.h"
 
+void	ft_handle_play(t_mlx *handle)
+{
+	mlx_loop_hook(handle->mlx, ft_frame, handle);
+	mlx_hook(handle->win, 2, 1L<<0, ft_keyPressed, handle);
+	mlx_hook(handle->win, 17, 0L, ft_kill, "");
+}
+
 char *ft_itoa(int num)
 {
 	int tmp = num;

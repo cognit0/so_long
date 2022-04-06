@@ -72,6 +72,7 @@ void	handle_init(t_mlx *handle)
 	handle->data = data_init(handle);
 	sprite_init(handle);
 	ft_render_map(handle);
+	render_map(handle);
 	handle->number_of_moves = 0;
 }
 

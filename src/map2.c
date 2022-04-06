@@ -14,30 +14,11 @@ void	free_map(char **map)
 	free(map);
 }
 
-// draw sprite
-static void	sprite_draw(t_mlx *handle, void *sprite, int x, int y)
-{
-	mlx_put_image_to_window
-		(handle->mlx, handle->win, sprite, x * 32, y * 32);
-}
-
-//draw background
 static void	player_draw(t_mlx *handle, void *sprite, int x, int y)
 {
 	handle->player_x = x;
 	handle->player_y = y;
 	sprite_draw(handle, sprite, x, y);
-}
-
-static void	exit_draw(t_mlx *handle, int x, int y)
-{
-	if (handle->collectable_obj == 0)
-	{
-		mlx_destroy_image(handle->mlx, handle->sprite_exit);
-		handle->sprite_exit = mlx_xpm_file_to_image
-			(handle->mlx, "img/exiton.xpm", &handle->sprite_w, &handle->sprite_h);
-	}
-	sprite_draw(handle, handle->sprite_exit, x, y);
 }
 
 int	render_map(t_mlx *handle)

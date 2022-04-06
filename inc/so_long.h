@@ -55,20 +55,28 @@ t_data	*data;
 //init
 void	handle_init(t_mlx *handle);
 
-
+// SPRITE
+void	exit_draw(t_mlx *handle, int x, int y);
+void	sprite_draw(t_mlx *handle, void *sprite, int x, int y);
+void	render_exit(t_mlx *handle);
 
 // DRAWING FUCNTIONS
-int		mlx_drawline_coords(t_mlx *handle, int bx, int dx, int by, int dy, int color);
 void	mlx_put_pixel_fast(t_data *data, int x, int y, int color);
-int		mlx_check_pixel(t_data *data, int x, int y, int color);
-
 
 
 // FRAME FUNCTIONS render
 int		ft_frame(t_mlx *handle);
 void	ft_handle_play(t_mlx *handle);
 
+// MOVES
+int		ft_bitch_get_d(t_mlx *handle);
+int		ft_bitch_get_w(t_mlx *handle);
+int		ft_bitch_get_a(t_mlx *handle);
+int		ft_bitch_get_s(t_mlx *handle);
 
+// GAME
+int 	check_player_on_item(t_mlx *handle, int x, int y);
+int 	check_player_on_exit(t_mlx *handle, int x, int y);
 
 // UTIL FUNCTIONS
 int		ft_kill(char *str);
@@ -87,6 +95,6 @@ int		ft_keyPressed(int keycode, t_mlx *handle);
 char	**read_map(char *path);
 void	free_map(char **map);
 int		map_checker(t_mlx *handle);
-int	render_map(t_mlx *handle);
+int		render_map(t_mlx *handle);
 
 #endif

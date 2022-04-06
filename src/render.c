@@ -1,52 +1,35 @@
 #include "so_long.h"
 
-static void	cleanWin(t_mlx *handle)
+int		put_player_move(t_mlx *handle, int x, int y)
 {
-	for (int x = 0; x < handle->map_width; x++)
-		for (int y = 0; y < handle->map_height; y++)
-			mlx_put_pixel_fast(handle->data, x, y, BLUE);
-}
-
-
-
-void	ft_handle_play(t_mlx *handle)
-{
-	mlx_loop_hook(handle->mlx, ft_frame, handle);
-	mlx_hook(handle->win, 2, 1L<<0, ft_keyPressed, handle);
-	mlx_hook(handle->win, 17, 0L, ft_kill, "");
-}
-
-
-
-static int check_player_on_item(t_mlx *handle, int x, int y)
-{
-	if (handle->map[y / 32][x / 32] == 'C')
-	{
-		handle->collectable_obj--;
-		handle->map[y / 32][x / 32] = '0';
-	}
+	int draw_x = (x / 32) - 1;
+	int draw_y = (y / 32) - 1;
+	for (int i = draw_x; i < draw_x + 3; i++)
+		for (int j = draw_y; j < draw_y + 3; j++)
+		{
+			if (i == x / 32 && j == y / 32)
+				sprite_draw(handle, handle->sprite_player, i, j);
+			else if (handle->map[j][i] == '1')
+				sprite_draw(handle, handle->sprite_wall, i, j);
+			else if (handle->map[j][i] == '0' || handle->map[j][i] == 'P')
+				sprite_draw(handle, handle->sprite_back, i, j);
+			else if (handle->map[j][i] == 'C')
+				sprite_draw(handle, handle->sprite_collectable, i, j);
+			else if (handle->map[j][i] == 'E')
+				exit_draw(handle, i, j);
+		}
+	for (int i = 0; i < handle->map_width / 32; i++)
+		sprite_draw(handle, handle->sprite_wall, i, 0);
 	return (0);
 }
-
-
-
-static int check_player_on_exit(t_mlx *handle, int x, int y)
-{
-	if (handle->map[y / 32][x / 32] == 'E')
-		ft_kill("BYE");
-
-	return (0);
-}
-
 
 int	ft_frame(t_mlx *handle)
 {
-	// cleanWin(handle);
 	if (handle->collectable_obj > 0)
 		check_player_on_item(handle, handle->player_x, handle->player_y);
 	else
 		check_player_on_exit(handle, handle->player_x, handle->player_y);
-	render_map(handle);
+	put_player_move(handle, handle->player_x, handle->player_y);
 	put_move_count(handle);
 	return (0);
 }

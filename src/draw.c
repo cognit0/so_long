@@ -1,26 +1,23 @@
 #include "so_long.h"
 
-int	mlx_drawline_coords(t_mlx *handle, int bx, int dx, int by, int dy, int color)
+void	render_exit(t_mlx *handle)
 {
-	double deltaX = dx - bx;
-	double deltaY = dy - by;
-	int pixels = sqrt((deltaX * deltaX) + (deltaY * deltaY));
-	deltaX /= pixels;
-	deltaY /= pixels;
-	double pixelX = bx;
-	double pixelY = by;
-	while (pixels)
+	int x;
+	int y;
+
+	y = 0;
+	while (handle->map[y])
 	{
-		mlx_put_pixel_fast(handle->data, pixelX, pixelY, color);
-		pixelX += deltaX;
-		pixelY += deltaY;
-
-		--pixels;
+		x = 0;
+		while (handle->map[y][x])
+		{
+			if (handle->map[y][x] == 'E')
+				exit_draw(handle, x, y);
+			x++;
+		}
+		y++;
 	}
-	return (0);
 }
-
-
 
 void	mlx_put_pixel_fast(t_data *data, int x, int y, int color)
 {
@@ -28,18 +25,6 @@ void	mlx_put_pixel_fast(t_data *data, int x, int y, int color)
 
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
-}
-
-
-
-int	mlx_check_pixel(t_data *data, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	if (*(unsigned int*)dst == (unsigned int )color)
-		return (1);
-	return (0);
 }
 
 int  	put_move_count(t_mlx *handle)
