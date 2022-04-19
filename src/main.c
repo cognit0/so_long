@@ -45,6 +45,7 @@ int	main(int argc, char **argv)
 			if (handle.map)
 			free_map(handle.map);
 			printf("Error\nInvalid Map");
+			free_all(&handle);
 			exit(1);
 		}
 	}

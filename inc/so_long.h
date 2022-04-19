@@ -82,6 +82,7 @@ int 	check_player_on_exit(t_mlx *handle, int x, int y);
 int		ft_kill(char *str);
 size_t	ft_strlen(const char *c);
 char 	*ft_itoa(int num);
+void	free_all(t_mlx *handle);
 
 // DRAWING FUNCTIONS
 int  	put_move_count(t_mlx *handle);

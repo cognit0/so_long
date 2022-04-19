@@ -30,6 +30,23 @@ char *ft_itoa(int num)
 	return (str);
 }
 
+void	free_all(t_mlx *handle)
+{
+	int i;
+
+	i = 0;
+	while (handle->map[i])
+		free(handle->map[i++]);
+	mlx_destroy_image(handle->mlx, handle->img_backg);
+	mlx_destroy_image(handle->mlx, handle->img_wall);
+	mlx_destroy_image(handle->mlx, handle->img_player);
+	mlx_destroy_image(handle->mlx, handle->img_colect);
+	mlx_destroy_image(handle->mlx, handle->img_exit);
+	mlx_destroy_window(handle->mlx, handle->win);
+	mlx_destroy_display(handle->mlx);
+	free(handle->data);
+}
+
 int	ft_kill(char *str)
 {
 	int i;
