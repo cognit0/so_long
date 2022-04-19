@@ -14,7 +14,10 @@ int check_player_on_exit(t_mlx *handle, int x, int y)
 {
 	render_exit(handle);
 	if (handle->map[y / 32][x / 32] == 'E')
+	{
+		free_all(handle);
 		ft_kill("YOU WIN");
+	}
 	return (0);
 }
 

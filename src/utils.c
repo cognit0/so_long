@@ -23,7 +23,7 @@ char *ft_itoa(int num)
 	i--;
 	while (i >= 0)
 	{
-		str[i] = num % 10 + 48;
+		str[i] = (num % 10) + 48;
 		num /= 10;
 		i--;
 	}
@@ -37,13 +37,12 @@ void	free_all(t_mlx *handle)
 	i = 0;
 	while (handle->map[i])
 		free(handle->map[i++]);
-	mlx_destroy_image(handle->mlx, handle->img_backg);
-	mlx_destroy_image(handle->mlx, handle->img_wall);
-	mlx_destroy_image(handle->mlx, handle->img_player);
-	mlx_destroy_image(handle->mlx, handle->img_colect);
-	mlx_destroy_image(handle->mlx, handle->img_exit);
+	mlx_destroy_image(handle->mlx, handle->sprite_back);
+	mlx_destroy_image(handle->mlx, handle->sprite_wall);
+	mlx_destroy_image(handle->mlx, handle->sprite_collectable);
+	mlx_destroy_image(handle->mlx, handle->sprite_exit);
+	mlx_destroy_image(handle->mlx, handle->sprite_player);
 	mlx_destroy_window(handle->mlx, handle->win);
-	mlx_destroy_display(handle->mlx);
 	free(handle->data);
 }
 
